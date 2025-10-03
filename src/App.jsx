@@ -9,7 +9,8 @@ import Footer from './components/Footer'
 import RegisterPage from './components/RegisterPage'
 import LoginPage from './components/LoginPage'
 import { Toaster } from 'react-hot-toast'
-import DashBoardLayout from './dashBoard/DashBoardLayout'
+import DashBoardLayout from './components/dashBoard/DashBoardLayout'
+
 
 function App() {
  

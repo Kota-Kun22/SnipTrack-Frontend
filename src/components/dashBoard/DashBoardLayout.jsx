@@ -1,12 +1,15 @@
-import React, { use } from 'react'
-import { dummyData } from '../dummyData/data'
+import React, { use, useState } from 'react'
+import { dummyData } from '../../dummyData/data'
 import Graph from './Graphs'
-import { useFetchTotalClicks } from '../hooks/useQuery';
-import { useStoreContext } from '../contextApi/ContextApi';
+import { useFetchTotalClicks } from '../../hooks/useQuery';
+import { useStoreContext } from '../../contextApi/ContextApi';
+import ShortenPopUp from './ShortenPopUp';
 
 const DashBoardLayout = () => {
 
+    const refetch = false;
     const {token }= useStoreContext();
+    const [shortenPopUp,setShortenPopUp] = useState(false);
 
     console.log(useFetchTotalClicks(token,onError));
 
@@ -25,7 +28,7 @@ const DashBoardLayout = () => {
 
         <div className="lg:w-[90%] w-full mx-auto py-16">
             <div className="h-96 relative">
-                {totalClicks.length==0&&(
+                {totalClicks.length == 0 &&(
                     <div className="absolute flex flex-col  justify-center sm:items-center items-end  w-full left-0 top-0 bottom-0 right-0 m-auto">
                      <h1 className=" text-slate-800 font-serif sm:text-2xl text-[18px] font-bold mb-1">
                        No Data For This Time Period
@@ -40,12 +43,18 @@ const DashBoardLayout = () => {
             </div>
             <div className="py-5 sm:text-end text-center">
                 <button 
-                  className="bg-custom-gradient px-4 py-2 rounded-md text-white">
+                  className="bg-custom-gradient px-4 py-2 rounded-md text-white"
+                  onClick={()=>setShortenPopUp(true)}>
                     Create New Snip URL
                 </button>
             </div>
         </div>
         )}
+        <ShortenPopUp
+          open={shortenPopUp}
+          setOpen={setShortenPopUp}
+          refetch={refetch}
+        />
     </div>
   )
 }

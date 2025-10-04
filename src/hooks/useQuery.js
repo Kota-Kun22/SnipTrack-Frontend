@@ -1,6 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../api/api";
 
+
+export const useFetchMyShortUrls = (token, onError) => {
+    return useQuery({
+        queryKey: ["my-shorturls"], // Changed: Wrap in array and use queryKey property
+        queryFn: async () => { // Changed: Moved to queryFn property
+            return await api.get(
+                "/api/urls/myurls",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        Authorization: "Bearer " + token,
+                    },
+                }
+            );
+        },
+        select: (data) => {
+            const sortedData = data.data.sort( (a,b)=> new Date(b.createdDate) - new Date(a.createdDate) );
+
+    
+            return sortedData;
+        },
+        onError,
+        staleTime: 5000 // 5 seconds caching it 
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //i have use the new tanstack/react-query syntax here based on that i have made changes in useFetchTotalClicks function
 export const useFetchTotalClicks = (token, onError) => {
     return useQuery({

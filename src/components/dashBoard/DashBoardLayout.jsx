@@ -1,19 +1,24 @@
 import React, { use, useState } from 'react'
 import { dummyData } from '../../dummyData/data'
 import Graph from './Graphs'
-import { useFetchTotalClicks } from '../../hooks/useQuery';
+import { useFetchMyShortUrls, useFetchTotalClicks } from '../../hooks/useQuery';
 import { useStoreContext } from '../../contextApi/ContextApi';
 import ShortenPopUp from './ShortenPopUp';
+import { FaLink } from 'react-icons/fa';
+import ShortenUrlList from './ShortenUrlList';
+
 
 const DashBoardLayout = () => {
 
-    const refetch = false;
+    // const refetch = false;
     const {token }= useStoreContext();
     const [shortenPopUp,setShortenPopUp] = useState(false);
 
     console.log(useFetchTotalClicks(token,onError));
 
-     const {isLoading: loader, data: totalClicks} = useFetchTotalClicks(token, onError)
+     const {isLoading, data: myShortenUrls,refetch} = useFetchMyShortUrls(token, onError)
+
+      const {isLoading: loader, data: totalClicks} = useFetchTotalClicks(token, onError)
 
      function onError(){
         console.log("error in fetching total clicks data");
@@ -46,8 +51,25 @@ const DashBoardLayout = () => {
                   className="bg-custom-gradient px-4 py-2 rounded-md text-white"
                   onClick={()=>setShortenPopUp(true)}>
                     Create New Snip URL
-                </button>
+                </button> 
             </div>
+
+           <div>
+            { !isLoading && myShortenUrls.length == 0 ?(
+              <div className="flex justify-center pt-16">
+                  <div className="flex gap-2 items-center justify-center  py-6 sm:px-8 px-5 rounded-md   shadow-lg  bg-gray-50">
+                    <h1 className="text-slate-800 font-montserrat   sm:text-[18px] text-[14px] font-semibold mb-1 ">
+                      You haven't created any short link yet
+                    </h1>
+                    <FaLink className="text-blue-500 sm:text-xl text-sm " />
+                  </div>
+              </div>
+            ):(
+               <ShortenUrlList data={myShortenUrls} />
+              // <p>hi</p>
+            )}
+           </div>
+
         </div>
         )}
         <ShortenPopUp

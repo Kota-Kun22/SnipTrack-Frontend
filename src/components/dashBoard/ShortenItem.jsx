@@ -60,7 +60,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
 
     // Handle copy click using the custom hook
     const handleCopyClick = () => {
-        const textToCopy = `${import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + shortUrl}`;
+        const textToCopy = `${import.meta.env.VITE_REACT_FRONT_END_URL + "/" + shortUrl}`;
         copyToClipboard(textToCopy);
     };
 
@@ -76,7 +76,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
                 <div className="flex-1 sm:space-y-1 max-w-full overflow-x-auto overflow-y-hidden">
                     <div className="text-slate-900 pb-1 sm:pb-0 flex items-center gap-2">
                         <a 
-                            href={`${import.meta.env.VITE_REACT_SUBDOMAIN}/${shortUrl}`}
+                            href={`${import.meta.env.VITE_REACT_FRONT_END_URL}/${shortUrl}`}
                             target="_blank"
                             className="text-[17px] font-montserrat font-[600] text-linkColor"
                         >

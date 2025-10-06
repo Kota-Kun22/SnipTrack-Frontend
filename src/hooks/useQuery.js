@@ -30,27 +30,6 @@ export const useFetchMyShortUrls = (token, onError) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //i have use the new tanstack/react-query syntax here based on that i have made changes in useFetchTotalClicks function
 export const useFetchTotalClicks = (token, onError) => {
     return useQuery({

@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "./components/ErrorPage";
 
 const AppRouter = () => {
     return (
@@ -26,6 +27,9 @@ const AppRouter = () => {
             <Route path="/dashboard" element={<PrivateRoute publicPage={false}>
                 <DashBoardLayout/>
             </PrivateRoute>}/>
+
+            <Route path="*" element={<ErrorPage message="Sorry We can't able to find this page for you --_-- "/>}/>
+             <Route path="/error" element={<ErrorPage message="Umm got into an error 0_0"/>}/>
         </Routes>
         <Footer/>
     </>

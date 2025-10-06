@@ -6,6 +6,7 @@ import { useStoreContext } from '../../contextApi/ContextApi';
 import ShortenPopUp from './ShortenPopUp';
 import { FaLink } from 'react-icons/fa';
 import ShortenUrlList from './ShortenUrlList';
+import { useNavigate } from 'react-router-dom';
 
 
 const DashBoardLayout = () => {
@@ -13,6 +14,7 @@ const DashBoardLayout = () => {
     // const refetch = false;
     const {token }= useStoreContext();
     const [shortenPopUp,setShortenPopUp] = useState(false);
+    const navigate = useNavigate();
 
     console.log(useFetchTotalClicks(token,onError));
 
@@ -21,6 +23,7 @@ const DashBoardLayout = () => {
       const {isLoading: loader, data: totalClicks} = useFetchTotalClicks(token, onError)
 
      function onError(){
+        navigate("/error");
         console.log("error in fetching total clicks data");
     }
 
